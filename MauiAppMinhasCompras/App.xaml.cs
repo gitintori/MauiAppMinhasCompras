@@ -12,7 +12,7 @@ namespace MauiAppMinhasCompras
             {
                 if(_db == null) // verifica se a instancia de _db ainda nao foi criada. se nao, inicia o if
                 {
-                    string path = Path.Combine( //gera o caminho do arquivo do banco de dados
+                    string path = Path.Combine( //gera o caminho do arquivo do banco de dados.
                         Environment.GetFolderPath(
                         Environment.SpecialFolder.LocalApplicationData), // retorna o caminho para a pasta de dados locais da aplicacao
                         "banco_sqlite_compras.db3"); // nome do arquivo do banco de dados sqlite. o arquivo é criado ou aberto nesse local
@@ -25,8 +25,14 @@ namespace MauiAppMinhasCompras
                 return _db;
             }
         }
+        public App()
+        {
+            InitializeComponent();
 
-        protected override Window CreateWindow(IActivationState? activationState)
+            //MainPage = new AppShell();
+            MainPage = new NavigationPage(new Views.ListaProduto());
+        }
+        protected override Window CreateWindow(IActivationState? activationState) // redimensionar a tela
         {
             var window = base.CreateWindow(activationState);
 

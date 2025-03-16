@@ -4,32 +4,35 @@
              x:Class="MauiAppMinhasCompras.Views.ListaProduto"
              Title="Minhas Compras">
 
-    <ContentPage.ToolbarItems> <!-- Fazer os botoes no menu superior -->
+    <ContentPage.ToolbarItems>
+        <!-- Fazer os botoes no menu superior -->
         <ToolbarItem Text="Somar" Clicked="Botao_Somar_Clicked" />
         <ToolbarItem Text="Adicionar" Clicked="Botao_Adicionar_Clicked"/>
         <ToolbarItem Text="Remover" Clicked="Botao_Remover_Clicked"/>
-        
+
     </ContentPage.ToolbarItems>
 
     <VerticalStackLayout>
         <SearchBar x:Name="txt_search" 
                    Placeholder="Busca de Produtos"
-                   TextChanged="txt_search_TextChanged"/> <!-- Criar a barra de busca-->
-            <ListView x:Name="lst_produtos">
-                <ListView.Header>
-                    <Grid ColumnDefinitions="*, *, *, *, *, Auto"> <!-- Coluna extra "auto" para o botao remover-->
-                        <Label Grid.Column="0" Text="ID" />
-                        <Label Grid.Column="1" Text="Descrição" />
-                        <Label Grid.Column="2" Text="Preço" />
-                        <Label Grid.Column="3" Text="Quantidade" />
+                   TextChanged="txt_search_TextChanged"/>
+        <!-- Criar a barra de busca-->
+        <ListView x:Name="lst_produtos">
+            <ListView.Header>
+                <Grid ColumnDefinitions="*, *, *, *, *">
+                    <Label Grid.Column="0" Text="ID" />
+                    <Label Grid.Column="1" Text="Descrição" />
+                    <Label Grid.Column="2" Text="Preço" />
+                    <Label Grid.Column="3" Text="Quantidade" />
                     <Label Grid.Column="4" Text="Total" />
-                    </Grid>
-                </ListView.Header>
+                </Grid>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Text="Remover" Clicked="Botao_Remover_Clicked"/> <!--Este faz remover quando clica com o botao direito do mouse-->
+                            <MenuItem Text="Remover" Clicked="Botao_Remover_Clicked"/>
+                            <!--Este faz remover quando clica com o botao direito do mouse-->
                         </ViewCell.ContextActions>
                         <Grid ColumnDefinitions="*, *, *, *, *">
                             <Label Grid.Column="0" Text="{Binding Id}" />

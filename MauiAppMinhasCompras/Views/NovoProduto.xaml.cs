@@ -4,15 +4,15 @@ namespace MauiAppMinhasCompras.Views;
 
 public partial class NovoProduto : ContentPage
 {
-	public NovoProduto()
-	{
-		InitializeComponent();
-	}
+    public NovoProduto()
+    {
+        InitializeComponent();
+    }
 
     private async void ToolbarItem_Clicked(object sender, EventArgs e)
     {
-		try
-		{
+        try
+        {
             //Criar a model:
             Produto p = new Produto
             {

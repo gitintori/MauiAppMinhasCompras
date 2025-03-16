@@ -6,13 +6,13 @@ namespace MauiAppMinhasCompras.Views;
 
 public partial class ListaProduto : ContentPage
 {
-	ObservableCollection<Produto> lista = new ObservableCollection<Produto>();
+    ObservableCollection<Produto> lista = new ObservableCollection<Produto>();
     private Produto _produtoSelecionado; // capturar o produto selecionado
     public ListaProduto()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
 
-		lst_produtos.ItemsSource = lista;
+        lst_produtos.ItemsSource = lista;
         lst_produtos.ItemSelected += Lst_produtos_ItemSelected; //implementar o evento de produto selecionado
     }
 
@@ -22,45 +22,46 @@ public partial class ListaProduto : ContentPage
     }
 
     protected async override void OnAppearing() // Toda vez que a tela aparecer, vai no sqlite buscar a
-												// lista de produtos e depois abastecer a observable collection
+                                                // lista de produtos e depois abastecer a observable collection
     {
-		List<Produto> tmp = await App.Db.GetAll();
+        List<Produto> tmp = await App.Db.GetAll();
 
-		tmp.ForEach(i => lista.Add(i));
+        tmp.ForEach(i => lista.Add(i));
     }
 
     private void Botao_Adicionar_Clicked(object sender, EventArgs e)
     {
-		try
-		{
-			Navigation.PushAsync(new Views.NovoProduto());
+        try
+        {
+            Navigation.PushAsync(new Views.NovoProduto());
 
-		} catch (Exception ex)
-		{
-			DisplayAlert("Ops", ex.Message, "OK");
-		}
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Ops", ex.Message, "OK");
+        }
 
     }
 
-	private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
-	{
-		string q = e.NewTextValue;
+    private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        string q = e.NewTextValue;
 
-		lista.Clear();
+        lista.Clear();
 
         List<Produto> tmp = await App.Db.Search(q);
 
         tmp.ForEach(i => lista.Add(i));
     }
 
-	private void Botao_Somar_Clicked(object sender, EventArgs e)
-	{
-		double soma = lista.Sum(i => i.Total);
+    private void Botao_Somar_Clicked(object sender, EventArgs e)
+    {
+        double soma = lista.Sum(i => i.Total);
 
-		string msg = $"O total é {soma:C}"; // o C transforma em valor de dinheiro
+        string msg = $"O total é {soma:C}"; // o C transforma em valor de dinheiro
 
-		DisplayAlert("Total dos produtos", msg, "OK");
-	}
+        DisplayAlert("Total dos produtos", msg, "OK");
+    }
 
     private async void Botao_Remover_Clicked(object sender, EventArgs e)
     {

@@ -10,7 +10,7 @@ namespace MauiAppMinhasCompras
         {
             get
             {
-                if(_db == null) // verifica se a instancia de _db ainda nao foi criada. se nao, inicia o if
+                if (_db == null) // verifica se a instancia de _db ainda nao foi criada. se nao, inicia o if
                 {
                     string path = Path.Combine( //gera o caminho do arquivo do banco de dados.
                         Environment.GetFolderPath(
@@ -19,8 +19,8 @@ namespace MauiAppMinhasCompras
 
                     _db = new SQLiteDatabaseHelper(path); // cria uma nova instancia da classe sqlitedatabasehelper,
                                                           // passando o caminho do banco de dados. essa instancia sera armazenada na variavel _db.
-                                                            // Se a instância já tiver sido criada anteriormente, a verificação if (_db == null) não entrará
-                                                            // no bloco de código e o código simplesmente retornará a instância existente de _db.
+                                                          // Se a instância já tiver sido criada anteriormente, a verificação if (_db == null) não entrará
+                                                          // no bloco de código e o código simplesmente retornará a instância existente de _db.
                 }
                 return _db;
             }

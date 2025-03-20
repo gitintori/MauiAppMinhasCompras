@@ -13,12 +13,23 @@ public partial class ListaProduto : ContentPage
         InitializeComponent();
 
         lst_produtos.ItemsSource = lista;
-        lst_produtos.ItemSelected += Lst_produtos_ItemSelected; //implementar o evento de produto selecionado
     }
 
     private void Lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        _produtoSelecionado = e.SelectedItem as Produto;
+        try
+        {
+            Produto p = e.SelectedItem as Produto; // pegar o produto selecionado
+
+            Navigation.PushAsync(new Views.EditarProduto
+            {
+                BindingContext = p,
+            });
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Ops", ex.Message, "OK");
+        }
     }
 
     protected async override void OnAppearing() // Toda vez que a tela aparecer, vai no sqlite buscar a
@@ -90,5 +101,10 @@ public partial class ListaProduto : ContentPage
                 await DisplayAlert("Ops", ex.Message, "OK");
             }
         }
+    }
+
+    private void lst_produtos_ItemSelected_1(object sender, SelectedItemChangedEventArgs e)
+    {
+
     }
 }

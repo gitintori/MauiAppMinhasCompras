@@ -63,11 +63,11 @@ public partial class ListaProduto : ContentPage
         }
     }
 
-    private void Somar_Clicked (object sender, EventArgs e)
+    private void Somar_Clicked(object sender, EventArgs e)
     {
         double soma = lista.Sum(i => i.Total);
 
-        string msg = $"O total � {soma:C}";
+        string msg = $"Total: {soma:C}";
 
         DisplayAlert("Total dos Produtos", msg, "OK");
     }
@@ -114,7 +114,7 @@ public partial class ListaProduto : ContentPage
                 // Remover o produto da lista
                 lista.Remove(_produtoSelecionado);
 
-                await DisplayAlert("Sucesso", "Produto removido com sucesso", "OK");
+                await DisplayAlert("Sucesso", "Produto removido com sucesso.", "OK");
             }
             catch (Exception ex)
             {
@@ -124,7 +124,7 @@ public partial class ListaProduto : ContentPage
     }
 
 
-private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         try
         {
@@ -138,5 +138,5 @@ private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventAr
         }
     }
 
-    
+
 }

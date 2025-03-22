@@ -5,7 +5,7 @@
              Title="{Binding Descricao}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Salvar" Clicked="ToolbarItem_Clicked" />
+        <ToolbarItem Text="Salvar" Clicked="Salvar_Edicao_Clicked" />
     </ContentPage.ToolbarItems>
 
     <VerticalStackLayout Spacing="10" Padding="10">

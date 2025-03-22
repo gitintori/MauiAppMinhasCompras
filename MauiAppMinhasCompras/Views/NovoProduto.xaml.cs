@@ -9,7 +9,7 @@ public partial class NovoProduto : ContentPage
         InitializeComponent();
     }
 
-    private async void ToolbarItem_Clicked(object sender, EventArgs e)
+    private async void Adicionar_Produto_Clicked(object sender, EventArgs e)
     {
         try
         {
@@ -21,7 +21,7 @@ public partial class NovoProduto : ContentPage
             };
 
             await App.Db.Insert(p);
-            await DisplayAlert("Sucesso!", "Registro Inserido", "OK");
+            await DisplayAlert("Sucesso!", "Produto adicionado.", "OK");
 
         }
         catch (Exception ex)

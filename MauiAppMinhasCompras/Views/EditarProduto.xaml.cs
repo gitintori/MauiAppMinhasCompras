@@ -9,7 +9,7 @@ public partial class EditarProduto : ContentPage
         InitializeComponent();
     }
 
-    private async void ToolbarItem_Clicked(object sender, EventArgs e)
+    private async void Salvar_Edicao_Clicked(object sender, EventArgs e)
     {
         try
         {
@@ -24,7 +24,7 @@ public partial class EditarProduto : ContentPage
             };
 
             await App.Db.Update(p);
-            await DisplayAlert("Sucesso!", "Registro Atualizado", "OK");
+            await DisplayAlert("Sucesso!", "Produto atualizado.", "OK");
             await Navigation.PopAsync();
         }
         catch (Exception ex)

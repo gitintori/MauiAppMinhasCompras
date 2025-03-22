@@ -13,7 +13,6 @@ public partial class NovoProduto : ContentPage
     {
         try
         {
-            //Criar a model:
             Produto p = new Produto
             {
                 Descricao = txt_descricao.Text,
@@ -22,7 +21,8 @@ public partial class NovoProduto : ContentPage
             };
 
             await App.Db.Insert(p);
-            await DisplayAlert("Sucesso!", "Registro inserido.", "OK"); //Mostrar mensagem de sucesso.
+            await DisplayAlert("Sucesso!", "Registro Inserido", "OK");
+
         }
         catch (Exception ex)
         {

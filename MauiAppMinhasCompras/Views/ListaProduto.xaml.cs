@@ -1,13 +1,14 @@
-using MauiAppMinhasCompras.Models;
+﻿using MauiAppMinhasCompras.Models;
 using System.Collections.ObjectModel;
-using System.Net.Http.Headers;
 
 namespace MauiAppMinhasCompras.Views;
 
 public partial class ListaProduto : ContentPage
 {
     ObservableCollection<Produto> lista = new ObservableCollection<Produto>();
-    private Produto _produtoSelecionado; // capturar o produto selecionado
+
+    private Produto _produtoSelecionado; // variável que armazena o produto selecionado
+
     public ListaProduto()
     {
         InitializeComponent();
@@ -15,32 +16,23 @@ public partial class ListaProduto : ContentPage
         lst_produtos.ItemsSource = lista;
     }
 
-    private void Lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    protected async override void OnAppearing()
     {
         try
         {
-            Produto p = e.SelectedItem as Produto; // pegar o produto selecionado
+            lista.Clear();
 
-            Navigation.PushAsync(new Views.EditarProduto
-            {
-                BindingContext = p,
-            });
+            List<Produto> tmp = await App.Db.GetAll();
+
+            tmp.ForEach(i => lista.Add(i));
         }
         catch (Exception ex)
         {
-            DisplayAlert("Ops", ex.Message, "OK");
+            await DisplayAlert("Ops", ex.Message, "OK");
         }
     }
 
-    protected async override void OnAppearing() // Toda vez que a tela aparecer, vai no sqlite buscar a
-                                                // lista de produtos e depois abastecer a observable collection
-    {
-        List<Produto> tmp = await App.Db.GetAll();
-
-        tmp.ForEach(i => lista.Add(i));
-    }
-
-    private void Botao_Adicionar_Clicked(object sender, EventArgs e)
+    private void Adicionar_Clicked(object sender, EventArgs e)
     {
         try
         {
@@ -51,30 +43,58 @@ public partial class ListaProduto : ContentPage
         {
             DisplayAlert("Ops", ex.Message, "OK");
         }
-
     }
 
     private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
     {
-        string q = e.NewTextValue;
+        try
+        {
+            string q = e.NewTextValue;
 
-        lista.Clear();
+            lista.Clear();
 
-        List<Produto> tmp = await App.Db.Search(q);
+            List<Produto> tmp = await App.Db.Search(q);
 
-        tmp.ForEach(i => lista.Add(i));
+            tmp.ForEach(i => lista.Add(i));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
     }
 
-    private void Botao_Somar_Clicked(object sender, EventArgs e)
+    private void Somar_Clicked (object sender, EventArgs e)
     {
         double soma = lista.Sum(i => i.Total);
 
-        string msg = $"O total � {soma:C}"; // o C transforma em valor de dinheiro
+        string msg = $"O total � {soma:C}";
 
-        DisplayAlert("Total dos produtos", msg, "OK");
+        DisplayAlert("Total dos Produtos", msg, "OK");
     }
 
-    private async void Botao_Remover_Clicked(object sender, EventArgs e)
+    private void Editar_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            // Verifica se um produto foi selecionado
+            if (_produtoSelecionado == null)
+            {
+                DisplayAlert("Aviso", "Selecione um produto para editar.", "OK");
+                return;
+            }
+
+            // Navega para a página de edição, passando o produto selecionado
+            Navigation.PushAsync(new Views.EditarProduto
+            {
+                BindingContext = _produtoSelecionado,
+            });
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Ops", ex.Message, "OK");
+        }
+    }
+    private async void Remover_Clicked(object sender, EventArgs e)
     {
         if (_produtoSelecionado == null)
         {
@@ -82,7 +102,7 @@ public partial class ListaProduto : ContentPage
             return;
         }
 
-        bool confirm = await DisplayAlert("Confirmar", $"Deseja remover o produto {_produtoSelecionado.Descricao}?", "Sim", "N�o");
+        bool confirm = await DisplayAlert("Confirmar", $"Deseja remover o produto {_produtoSelecionado.Descricao}?", "Sim", "Não");
 
         if (confirm)
         {
@@ -103,8 +123,20 @@ public partial class ListaProduto : ContentPage
         }
     }
 
-    private void lst_produtos_ItemSelected_1(object sender, SelectedItemChangedEventArgs e)
-    {
 
+private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        try
+        {
+            // Armazena o produto selecionado
+            _produtoSelecionado = e.SelectedItem as Produto;
+
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Ops", ex.Message, "OK");
+        }
     }
+
+    
 }

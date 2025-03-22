@@ -5,25 +5,23 @@
              Title="Minhas Compras">
 
     <ContentPage.ToolbarItems>
-        <!-- Fazer os botoes no menu superior -->
-        <ToolbarItem Text="Somar" Clicked="Botao_Somar_Clicked" />
-        <ToolbarItem Text="Adicionar" Clicked="Botao_Adicionar_Clicked"/>
-        <ToolbarItem Text="Remover" Clicked="Botao_Remover_Clicked"/>
-
+        <ToolbarItem Text="Somar" Clicked="Somar_Clicked" />
+        <ToolbarItem Text="Adicionar" Clicked="Adicionar_Clicked" />
+        <ToolbarItem Text="Editar" Clicked="Editar_Clicked" />
+        <ToolbarItem Text="Remover" Clicked="Remover_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <VerticalStackLayout>
         <SearchBar x:Name="txt_search" 
-                   Placeholder="Busca de Produtos"
+                   Placeholder="Buscar Produtos"
                    TextChanged="txt_search_TextChanged"/>
-        <!-- Criar a barra de busca-->
-        <ListView x:Name="lst_produtos" ItemSelected="lst_produtos.ItemSelected">
+        <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected">
             <ListView.Header>
                 <Grid ColumnDefinitions="*, *, *, *, *">
                     <Label Grid.Column="0" Text="ID" />
                     <Label Grid.Column="1" Text="Descrição" />
                     <Label Grid.Column="2" Text="Preço" />
-                    <Label Grid.Column="3" Text="Quantidade" />
+                    <Label Grid.Column="3" Text="Qnt" />
                     <Label Grid.Column="4" Text="Total" />
                 </Grid>
             </ListView.Header>
@@ -31,8 +29,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
-                            <MenuItem Text="Remover" Clicked="Botao_Remover_Clicked"/>
-                            <!--Este faz remover quando clica com o botao direito do mouse-->
+                            <MenuItem Text="Remover" Clicked="Remover_Clicked" />
                         </ViewCell.ContextActions>
                         <Grid ColumnDefinitions="*, *, *, *, *">
                             <Label Grid.Column="0" Text="{Binding Id}" />

@@ -28,13 +28,15 @@
         <Picker x:Name="categoryPicker"
                 Title="Selecione uma categoria"
                 Margin="10, 10, 10, 0"
-                SelectedIndexChanged="CategoryPicker">
+                SelectedIndexChanged="EscolherCategoria">
             <Picker.Items>
                 <x:String>Todas</x:String>
                 <x:String>Alimentos</x:String>
                 <x:String>Bebidas</x:String>
                 <x:String>Limpeza</x:String>
                 <x:String>Higiene</x:String>
+                <x:String>Roupas</x:String>
+                <x:String>Eletrônicos</x:String>
             </Picker.Items>
         </Picker>
 

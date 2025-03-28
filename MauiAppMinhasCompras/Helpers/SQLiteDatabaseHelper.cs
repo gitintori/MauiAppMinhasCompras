@@ -21,9 +21,9 @@ namespace MauiAppMinhasCompras.Helpers
         }
         public Task<List<Produto>> Update(Produto p) //atualizar. poderia estar igual o insert, mas esta é outra sintaxe:
         {
-            string sql = "UPDATE Produto SET Descricao=?, Quantidade=?, Preco=? WHERE Id=?";
+            string sql = "UPDATE Produto SET Descricao=?, Quantidade=?, Preco=?, Categoria=? WHERE Id=?";
             return _conn.QueryAsync<Produto>(
-            sql, p.Descricao, p.Quantidade, p.Preco, p.Id //essa ordem tem que obedecer a ordem da string sql
+            sql, p.Descricao, p.Quantidade, p.Preco, p.Categoria, p.Id //essa ordem tem que obedecer a ordem da string sql
             );
         }
         public Task<int> Delete(int id) // deletar usando apenas o id, por isso nao tem produto p
@@ -41,16 +41,16 @@ namespace MauiAppMinhasCompras.Helpers
             return _conn.QueryAsync<Produto>(sql);
         }
 
-        public Task<List<Produto>> GetByCategory(string category)
+        public Task<List<Produto>> FiltrarPorCategoria(string categoria)
         {
             // Se a categoria for "Todas" ou vazia, retorna todos os produtos
-            if (string.IsNullOrEmpty(category) || category == "Todas")
+            if (string.IsNullOrEmpty(categoria) || categoria == "Todas")
             {
                 return GetAll();
             }
 
             return _conn.Table<Produto>()
-                       .Where(p => p.Categoria == category)
+                       .Where(p => p.Categoria == categoria)
                        .ToListAsync();
         }
     }

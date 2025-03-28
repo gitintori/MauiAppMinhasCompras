@@ -70,7 +70,7 @@ public partial class ListaProduto : ContentPage
         }
     }
 
-    private async void CategoryPicker (object sender, EventArgs e)
+    private async void EscolherCategoria (object sender, EventArgs e)
     {
 
         try
@@ -96,7 +96,7 @@ public partial class ListaProduto : ContentPage
             }
             else
             {
-                tmp = await App.Db.GetByCategory(selectedCategory);
+                tmp = await App.Db.FiltrarPorCategoria(selectedCategory);
             }
 
             // Verifica se há produtos na categoria selecionada

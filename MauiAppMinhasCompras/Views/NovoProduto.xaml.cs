@@ -22,7 +22,7 @@ public partial class NovoProduto : ContentPage
 
             await App.Db.Insert(p);
             await DisplayAlert("Sucesso!", "Produto adicionado.", "OK");
-
+            await Navigation.PopAsync(); // serve para retornar a outra tela
         }
         catch (Exception ex)
         {

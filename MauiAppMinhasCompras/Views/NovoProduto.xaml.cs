@@ -18,7 +18,7 @@ public partial class NovoProduto : ContentPage
                 Descricao = txt_descricao.Text,
                 Quantidade = Convert.ToDouble(txt_quantidade.Text),
                 Preco = Convert.ToDouble(txt_preco.Text),
-                Categoria = txt_categoria.Text,
+                Categoria = categoryPicker.SelectedItem?.ToString() ?? "Sem Categoria"
             };
 
             await App.Db.Insert(p);
@@ -28,6 +28,18 @@ public partial class NovoProduto : ContentPage
         catch (Exception ex)
         {
             await DisplayAlert("Ops", ex.Message, "OK");
+        }
+    }
+
+    private void EscolherCategoria(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
+
+        if (selectedIndex != -1 && BindingContext is Produto produto)
+        {
+            // Atualiza a categoria do produto com o valor selecionado
+            produto.Categoria = picker.Items[selectedIndex];
         }
     }
 }

@@ -18,7 +18,18 @@
         <Label Text="Preço Unitário:" />
         <Entry x:Name="txt_preco" Keyboard="Numeric" />
 
-        <Label Text="Categoria:" />
-        <Entry x:Name="txt_categoria"/>
+        <Picker x:Name="categoryPicker"
+                 Title="Categoria:"
+                 Margin="0, 10, 0, 0"
+                 SelectedIndexChanged="EscolherCategoria">
+            <Picker.Items>
+                <x:String>Alimentos</x:String>
+                <x:String>Bebidas</x:String>
+                <x:String>Limpeza</x:String>
+                <x:String>Higiene</x:String>
+                <x:String>Roupas</x:String>
+                <x:String>Eletrônicos</x:String>
+            </Picker.Items>
+        </Picker>
     </VerticalStackLayout>
 </ContentPage>

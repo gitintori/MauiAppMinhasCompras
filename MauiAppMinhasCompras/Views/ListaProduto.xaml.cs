@@ -20,6 +20,10 @@ public partial class ListaProduto : ContentPage
     {
         try
         {
+            base.OnAppearing();
+
+            // Define "Todas" como selecionado por padrão
+            categoryPicker.SelectedIndex = 0; // "Todas" é o primeiro item (índice 0)
 
             lista.Clear();
 

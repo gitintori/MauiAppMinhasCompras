@@ -53,5 +53,7 @@ namespace MauiAppMinhasCompras.Helpers
                        .Where(p => p.Categoria == categoria)
                        .ToListAsync();
         }
+
+
     }
 }

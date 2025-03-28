@@ -27,11 +27,14 @@ namespace MauiAppMinhasCompras
         }
         public App()
         {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("pt-BR");
+
             InitializeComponent();
 
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("pt-BR");
+           
             //MainPage = new AppShell();
             MainPage = new NavigationPage(new Views.ListaProduto());
+
         }
         protected override Window CreateWindow(IActivationState? activationState) // redimensionar a tela
         {
@@ -42,5 +45,6 @@ namespace MauiAppMinhasCompras
 
             return window;
         }
+
     }
 }

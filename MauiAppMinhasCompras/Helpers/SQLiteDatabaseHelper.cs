@@ -40,5 +40,18 @@ namespace MauiAppMinhasCompras.Helpers
             //%-> alguma coisa. entao, é alguma coisa + o parametro q + alguma coisa
             return _conn.QueryAsync<Produto>(sql);
         }
+
+        public Task<List<Produto>> GetByCategory(string category)
+        {
+            // Se a categoria for "Todas" ou vazia, retorna todos os produtos
+            if (string.IsNullOrEmpty(category) || category == "Todas")
+            {
+                return GetAll();
+            }
+
+            return _conn.Table<Produto>()
+                       .Where(p => p.Categoria == category)
+                       .ToListAsync();
+        }
     }
 }

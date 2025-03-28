@@ -219,5 +219,4 @@ public partial class ListaProduto : ContentPage
         }
     }
 
-
 }

@@ -54,6 +54,5 @@ namespace MauiAppMinhasCompras.Helpers
                        .ToListAsync();
         }
 
-
     }
 }
